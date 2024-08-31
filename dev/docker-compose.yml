@@ -2,7 +2,7 @@ version: "3"
 
 services:
   lakevision:
-    image: localhost/lakevision
+    image: lakevision
     container_name: lakevision
     build: ../
     networks:
@@ -31,7 +31,7 @@ services:
     networks:
       iceberg_net:
     ports:
-      - 8181:8181
+      - 8183:8181
     environment:
       - AWS_ACCESS_KEY_ID=admin
       - AWS_SECRET_ACCESS_KEY=password
@@ -51,8 +51,8 @@ services:
         aliases:
           - warehouse.minio
     ports:
-      - 9001:9001
-      - 9000:9000
+      - 9004:9001
+      - 9003:9000
     command: ["server", "/data", "--console-address", ":9001"]
   mc:
     depends_on:

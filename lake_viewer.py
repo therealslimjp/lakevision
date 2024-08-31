@@ -11,6 +11,8 @@ from streamlit.components.v1 import html
 import json
 import dotenv
 from table_tabs.ingestion_statistics import show_ingestion_patterns
+from table_tabs.compaction_tab import show_compaction_tab
+
 dotenv.load_dotenv(dotenv.find_dotenv(usecwd=True)) #Use current working directory to load .env file
 print(os.environ)
 
@@ -132,7 +134,7 @@ class LakeView():
             relative_path = f"{relative_path}&partition={partition}"
         right.link_button(":rocket:",f"/{relative_path}" , help="Open current table view in a new tab")
 
-        tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["Partitions & Sample", "Table",  "Snapshots", "Refs", "Manifests", "Entries", "History", "Ingestion Patterns"])
+        tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs(["Partitions & Sample", "Table",  "Snapshots", "Refs", "Manifests", "Entries", "History", "Ingestion Patterns", "Compaction"])
             
         with tab1:    
             st.markdown("**PartitionSpec**")
@@ -250,6 +252,9 @@ class LakeView():
 
         with tab8:
             show_ingestion_patterns(t)
+
+        with tab9:
+            show_compaction_tab(ns, tb)
 
     def get_row_filter(self, partition, table):
         if partition is None or len(partition) == 0:

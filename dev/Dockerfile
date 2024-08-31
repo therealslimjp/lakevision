@@ -1,2 +1,2 @@
-FROM localhost/lakevision:latest
+FROM lakevision:latest
 COPY load_data.py /
